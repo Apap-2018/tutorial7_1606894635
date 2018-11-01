@@ -69,17 +69,17 @@ public class FlightController {
         return "flight has been deleted";
     }
 
-    @PutMapping(value = "/update/{pilotId}")
-	public String updateFlightDB(@PathVariable(value = "pilotId") long pilotId, @RequestParam(value = "flightNumber", required = false) String flightNumber, @RequestParam(value = "origin", required = false) String origin, @RequestParam(value = "destination", required = false) String destination, @RequestParam(value = "time", required = false) Date time) {
-        PilotModel pilot = pilotService.getPilotDetailById(pilotId).get();
+    @PutMapping(value = "/update/{flightid}")
+	public String updateFlightDB(@PathVariable(value = "pilotId") long flightId, @RequestParam(value = "flightNumber", required = false) String flightNumber, @RequestParam(value = "origin", required = false) String origin, @RequestParam(value = "destination", required = false) String destination, @RequestParam(value = "time", required = false) Date time) {
+        PilotModel pilot = pilotService.getPilotDetailById(flightId).get();
         if (pilot.equals(null)) {
 			return "Couldn't find your pilot";
 		}
         
-        System.out.println(pilotId);
+        System.out.println(flightId);
         System.out.println(flightNumber + " " + origin + " " + destination);
         System.out.println(pilot.getLicenseNumber());
-		flightService.updateFlight(pilotId, flightNumber, origin, destination, time);
+		flightService.updateFlight(flightId, flightNumber, origin, destination, time);
         return "flight update success";
     }
 }
